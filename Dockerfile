@@ -1,5 +1,7 @@
 FROM node:20
 
+ENV METEOR_ALLOW_SUPERUSER=true
+
 RUN curl https://install.meteor.com/ | sh
 
 WORKDIR /app
@@ -8,7 +10,7 @@ COPY . .
 
 RUN meteor npm install
 
-RUN meteor build ../build --directory
+RUN meteor build ../build --directory --allow-superuser
 
 WORKDIR /build/bundle/programs/server
 
