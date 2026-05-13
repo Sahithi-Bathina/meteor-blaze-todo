@@ -1,0 +1,81 @@
+<head>
+  <title>My To-Do List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="container">
+    {{> mainContainer}}
+  </div>
+</body>
+
+<template name="mainContainer">
+  <div class="app-wrapper">
+    <header class="app-header">
+      <div class="logo-area">
+        <i class="fas fa-chevron-circle-up logo-icon"></i>
+        <h1>My To-Do List</h1>
+      </div>
+    </header>
+
+    <form class="new-task">
+      <input type="text" name="text" placeholder="Add a new task..." required />
+      
+      <select name="category" class="category-select">
+        <option value="General">General</option>
+        <option value="Work">Work</option>
+        <option value="Placement">Placement</option>
+        <option value="Courses">Courses</option>
+      </select>
+
+      <button type="submit" class="add-btn">+ Add</button>
+    </form>
+
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-btn {{activeFilterClass 'all'}}" data-filter="all">
+          <i class="fas fa-list"></i> All
+        </button>
+        <button class="filter-btn {{activeFilterClass 'active'}}" data-filter="active">
+          <i class="fas fa-circle-notch"></i> Active
+        </button>
+        <button class="filter-btn {{activeFilterClass 'completed'}}" data-filter="completed">
+          <i class="fas fa-check-double"></i> Completed
+        </button>
+      </div>
+      <div class="task-count">
+        {{incompleteCount}} items left
+      </div>
+    </div>
+
+    <ul id="tasks" class="task-list">
+      {{#each tasks}}
+        {{> taskItem}}
+      {{else}}
+        <div class="empty-state">
+          <i class="fas fa-clipboard-list"></i>
+          <p>{{emptyStateMessage}}</p>
+        </div>
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="taskItem">
+  <li data-id="{{_id}}" class="task-item category-{{category}}">
+    <div class="task-left">
+      <!-- Added drag-handle functionality to the text/info area -->
+      <span class="drag-handle" style="cursor: grab; margin-right: 10px; color: #475569;">⠿</span>
+      <input type="checkbox" class="toggle-checked custom-checkbox" checked="{{checked}}" />
+      <div class="task-info">
+        <span class="text {{#if checked}}completed{{/if}}">{{text}}</span>
+        <span class="category-tag">{{category}}</span>
+      </div>
+    </div>
+    <div class="task-right">
+      <button class="delete-task">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </li>
+</template>
