@@ -11,6 +11,13 @@ This project was developed as part of a technical assessment to demonstrate:
 - Modern frontend UI/UX practices
 
 ---
+## 🌐 Live Demo
+
+Experience the deployed application here:
+
+👉 https://meteor-blaze-todo-app-1cau.onrender.com/
+
+---
 
 ## ✨ Features
 
